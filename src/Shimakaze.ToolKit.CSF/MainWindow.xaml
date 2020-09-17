@@ -56,6 +56,9 @@
                     ScrollViewer.VerticalScrollBarVisibility="Visible"
                     VirtualizingPanel.IsVirtualizing="True"
                     VirtualizingPanel.VirtualizationMode="Recycling"
+                    VirtualizingPanel.ScrollUnit="Pixel"
+                    VirtualizingPanel.CacheLengthUnit="Pixel"
+                    VirtualizingPanel.CacheLength="20,20"
                     SelectionChanged="ClassView_Selected">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type viewModel:CsfLabelViewModel}">
