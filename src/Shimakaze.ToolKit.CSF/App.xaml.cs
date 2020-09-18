@@ -6,9 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-using Shimakaze.ToolKit.CSF.Data;
+using Shimakaze.ToolKit.Csf.Data;
+using Shimakaze.ToolKit.Csf.Properties;
 
-namespace Shimakaze.ToolKit.CSF
+namespace Shimakaze.ToolKit.Csf
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -17,18 +18,13 @@ namespace Shimakaze.ToolKit.CSF
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            Resource.ResourceManager.I18NInitialize();
             ControlzEx.Theming.ThemeManager.Current.ThemeSyncMode = ControlzEx.Theming.ThemeSyncMode.SyncAll;
             ControlzEx.Theming.ThemeManager.Current.SyncTheme();
 
             base.OnStartup(e);
             this.ChangeThemeBaseColor("Dark");
             this.ChangeThemeColorScheme("Purple");
-        }
-
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            System.IO.File.WriteAllText("error.log", e.Exception.ToString());
-            MessageBox.Show(e.Exception.ToString(), "Fatal Error");
         }
     }
 }

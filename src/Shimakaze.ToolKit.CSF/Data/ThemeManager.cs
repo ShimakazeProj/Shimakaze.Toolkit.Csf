@@ -5,7 +5,7 @@ using System.Windows;
 
 using ControlzEx.Theming;
 
-namespace Shimakaze.ToolKit.CSF.Data
+namespace Shimakaze.ToolKit.Csf.Data
 {
     public static class ThemeManager
     {

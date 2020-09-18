@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shimakaze.ToolKit.CSF.Properties {
+namespace Shimakaze.ToolKit.Csf.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Shimakaze.ToolKit.CSF.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shimakaze.ToolKit.CSF.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shimakaze.ToolKit.Csf.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,308 @@ namespace Shimakaze.ToolKit.CSF.Properties {
         }
         
         /// <summary>
+        ///   查找类似 正在计算文件头 的本地化字符串。
+        /// </summary>
+        public static string CalculatingHeader {
+            get {
+                return ResourceManager.GetString("CalculatingHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 取消 的本地化字符串。
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 就绪 的本地化字符串。
+        /// </summary>
+        public static string Complete {
+            get {
+                return ResourceManager.GetString("Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在转换 的本地化字符串。
+        /// </summary>
+        public static string Converting {
+            get {
+                return ResourceManager.GetString("Converting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 CSF Editor 的本地化字符串。
         /// </summary>
-        public static string MainWindowTitle {
+        public static string MainWindow_Title {
             get {
-                return ResourceManager.GetString("MainWindowTitle", resourceCulture);
+                return ResourceManager.GetString("MainWindow.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在读取文件 的本地化字符串。
+        /// </summary>
+        public static string ReadingFile {
+            get {
+                return ResourceManager.GetString("ReadingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创建类型副本 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_CopyClass_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_CopyClass.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创建标签副本 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_CopyLabel_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_CopyLabel.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 创建字符串副本 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_CopyValue_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_CopyValue.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除类型 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_DropClass_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_DropClass.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除标签 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_DropLabel_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_DropLabel.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 移除字符串 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_DropValue_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_DropValue.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 导出类型到文件 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_ExportClass_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_ExportClass.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 新建标签 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_NewLabel_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_NewLabel.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 新建字符串 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_NewValue_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_NewValue.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 打开 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_Open_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_Open.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重命名类型 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_RenameClass_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_RenameClass.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_Save_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_Save.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 另存为 的本地化字符串。
+        /// </summary>
+        public static string RibbonButton_SaveAs_Header {
+            get {
+                return ResourceManager.GetString("RibbonButton_SaveAs.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 类型 的本地化字符串。
+        /// </summary>
+        public static string RibbonGroupBox_Class_Header {
+            get {
+                return ResourceManager.GetString("RibbonGroupBox_Class.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 标签 的本地化字符串。
+        /// </summary>
+        public static string RibbonGroupBox_Label_Header {
+            get {
+                return ResourceManager.GetString("RibbonGroupBox_Label.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字符串 的本地化字符串。
+        /// </summary>
+        public static string RibbonGroupBox_Value_Header {
+            get {
+                return ResourceManager.GetString("RibbonGroupBox_Value.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 开始 的本地化字符串。
+        /// </summary>
+        public static string RibbonTabItem_Start_Header {
+            get {
+                return ResourceManager.GetString("RibbonTabItem_Start.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在排序 的本地化字符串。
+        /// </summary>
+        public static string Sorting {
+            get {
+                return ResourceManager.GetString("Sorting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 文件头信息 的本地化字符串。
+        /// </summary>
+        public static string StatusBarItem_Head_Title {
+            get {
+                return ResourceManager.GetString("StatusBarItem_Head.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 统计信息 的本地化字符串。
+        /// </summary>
+        public static string StatusBarItem_Statistics_Title {
+            get {
+                return ResourceManager.GetString("StatusBarItem_Statistics.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 状态 的本地化字符串。
+        /// </summary>
+        public static string StatusBarItem_Status_Title {
+            get {
+                return ResourceManager.GetString("StatusBarItem_Status.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 标签数 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_LabelCount_Text {
+            get {
+                return ResourceManager.GetString("TextBlock_LabelCount.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 语言 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Language_Text {
+            get {
+                return ResourceManager.GetString("TextBlock_Language.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 版本 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Version_Text {
+            get {
+                return ResourceManager.GetString("TextBlock_Version.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在等待返回 的本地化字符串。
+        /// </summary>
+        public static string Waiting {
+            get {
+                return ResourceManager.GetString("Waiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在写入文件 的本地化字符串。
+        /// </summary>
+        public static string WritingFile {
+            get {
+                return ResourceManager.GetString("WritingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 错误 的本地化字符串。
+        /// </summary>
+        public static string Wrong {
+            get {
+                return ResourceManager.GetString("Wrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 未打开文件, 请先打开一个文件后操作 的本地化字符串。
+        /// </summary>
+        public static string Wrong_NotOpenFile {
+            get {
+                return ResourceManager.GetString("Wrong_NotOpenFile", resourceCulture);
             }
         }
     }

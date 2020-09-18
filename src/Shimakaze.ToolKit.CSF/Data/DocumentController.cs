@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 using Shimakaze.Struct.Csf;
 using Shimakaze.Struct.Csf.Helper;
-using Shimakaze.ToolKit.CSF.ViewModel;
+using Shimakaze.ToolKit.Csf.ViewModel;
 
-namespace Shimakaze.ToolKit.CSF.Data
+namespace Shimakaze.ToolKit.Csf.Data
 {
     public class DocumentController
     {

@@ -6,9 +6,141 @@
     </header>
     <body>
       <group id="SHIMAKAZE.TOOLKIT.CSF/PROPERTIES/RESOURCE.RESX" datatype="resx">
-        <trans-unit id="MainWindowTitle" translate="yes" xml:space="preserve">
+        <trans-unit id="Converting" translate="yes" xml:space="preserve">
+          <source>正在转换</source>
+          <target state="new">正在转换</target>
+        </trans-unit>
+        <trans-unit id="CalculatingHeader" translate="yes" xml:space="preserve">
+          <source>正在计算文件头</source>
+          <target state="new">正在计算文件头</target>
+        </trans-unit>
+        <trans-unit id="WritingFile" translate="yes" xml:space="preserve">
+          <source>正在写入文件</source>
+          <target state="new">正在写入文件</target>
+        </trans-unit>
+        <trans-unit id="Complete" translate="yes" xml:space="preserve">
+          <source>就绪</source>
+          <target state="new">就绪</target>
+        </trans-unit>
+        <trans-unit id="MainWindow.Title" translate="yes" xml:space="preserve">
           <source>CSF Editor</source>
           <target state="new">CSF Editor</target>
+        </trans-unit>
+        <trans-unit id="ReadingFile" translate="yes" xml:space="preserve">
+          <source>正在读取文件</source>
+          <target state="new">正在读取文件</target>
+        </trans-unit>
+        <trans-unit id="Cancel" translate="yes" xml:space="preserve">
+          <source>取消</source>
+          <target state="new">取消</target>
+        </trans-unit>
+        <trans-unit id="Wrong" translate="yes" xml:space="preserve">
+          <source>错误</source>
+          <target state="new">错误</target>
+        </trans-unit>
+        <trans-unit id="Waiting" translate="yes" xml:space="preserve">
+          <source>正在等待返回</source>
+          <target state="new">正在等待返回</target>
+        </trans-unit>
+        <trans-unit id="Wrong_NotOpenFile" translate="yes" xml:space="preserve">
+          <source>未打开文件, 请先打开一个文件后操作</source>
+          <target state="new">未打开文件, 请先打开一个文件后操作</target>
+        </trans-unit>
+        <trans-unit id="Sorting" translate="yes" xml:space="preserve">
+          <source>正在排序</source>
+          <target state="new">正在排序</target>
+        </trans-unit>
+        <trans-unit id="RibbonTabItem_Start.Header" translate="yes" xml:space="preserve">
+          <source>开始</source>
+          <target state="new">开始</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_Open.Header" translate="yes" xml:space="preserve">
+          <source>打开</source>
+          <target state="new">打开</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_Save.Header" translate="yes" xml:space="preserve">
+          <source>保存</source>
+          <target state="new">保存</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_SaveAs.Header" translate="yes" xml:space="preserve">
+          <source>另存为</source>
+          <target state="new">另存为</target>
+        </trans-unit>
+        <trans-unit id="TextBlock_Version.Text" translate="yes" xml:space="preserve">
+          <source>版本</source>
+          <target state="new">版本</target>
+        </trans-unit>
+        <trans-unit id="TextBlock_Language.Text" translate="yes" xml:space="preserve">
+          <source>语言</source>
+          <target state="new">语言</target>
+        </trans-unit>
+        <trans-unit id="StatusBarItem_Status.Title" translate="yes" xml:space="preserve">
+          <source>状态</source>
+          <target state="new">状态</target>
+        </trans-unit>
+        <trans-unit id="StatusBarItem_Head.Title" translate="yes" xml:space="preserve">
+          <source>文件头信息</source>
+          <target state="new">文件头信息</target>
+        </trans-unit>
+        <trans-unit id="StatusBarItem_Statistics.Title" translate="yes" xml:space="preserve">
+          <source>统计信息</source>
+          <target state="new">统计信息</target>
+        </trans-unit>
+        <trans-unit id="TextBlock_LabelCount.Text" translate="yes" xml:space="preserve">
+          <source>标签数</source>
+          <target state="new">标签数</target>
+        </trans-unit>
+        <trans-unit id="RibbonGroupBox_Label.Header" translate="yes" xml:space="preserve">
+          <source>标签</source>
+          <target state="new">标签</target>
+        </trans-unit>
+        <trans-unit id="RibbonGroupBox_Class.Header" translate="yes" xml:space="preserve">
+          <source>类型</source>
+          <target state="new">类型</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_RenameClass.Header" translate="yes" xml:space="preserve">
+          <source>重命名类型</source>
+          <target state="new">重命名类型</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_CopyClass.Header" translate="yes" xml:space="preserve">
+          <source>创建类型副本</source>
+          <target state="new">创建类型副本</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_ExportClass.Header" translate="yes" xml:space="preserve">
+          <source>导出类型到文件</source>
+          <target state="new">导出类型到文件</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_DropClass.Header" translate="yes" xml:space="preserve">
+          <source>移除类型</source>
+          <target state="new">移除类型</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_NewLabel.Header" translate="yes" xml:space="preserve">
+          <source>新建标签</source>
+          <target state="new">新建标签</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_CopyLabel.Header" translate="yes" xml:space="preserve">
+          <source>创建标签副本</source>
+          <target state="new">创建标签副本</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_DropLabel.Header" translate="yes" xml:space="preserve">
+          <source>移除标签</source>
+          <target state="new">移除标签</target>
+        </trans-unit>
+        <trans-unit id="RibbonGroupBox_Value.Header" translate="yes" xml:space="preserve">
+          <source>字符串</source>
+          <target state="new">字符串</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_NewValue.Header" translate="yes" xml:space="preserve">
+          <source>新建字符串</source>
+          <target state="new">新建字符串</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_CopyValue.Header" translate="yes" xml:space="preserve">
+          <source>创建字符串副本</source>
+          <target state="new">创建字符串副本</target>
+        </trans-unit>
+        <trans-unit id="RibbonButton_DropValue.Header" translate="yes" xml:space="preserve">
+          <source>移除字符串</source>
+          <target state="new">移除字符串</target>
         </trans-unit>
       </group>
     </body>

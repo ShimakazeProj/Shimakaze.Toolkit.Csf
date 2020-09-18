@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 using Shimakaze.Struct.Csf;
 using Shimakaze.Struct.Csf.Helper;
-using Shimakaze.ToolKit.CSF.Annotations;
+using Shimakaze.ToolKit.Csf.Annotations;
 
-namespace Shimakaze.ToolKit.CSF.ViewModel
+namespace Shimakaze.ToolKit.Csf.ViewModel
 {
-    public class DocumentViewModel : INotifyPropertyChanged
+    public class CsfDocumentViewModel : INotifyPropertyChanged
     {
         private int _language;
         private int _version;
@@ -24,7 +24,7 @@ namespace Shimakaze.ToolKit.CSF.ViewModel
             get => this._version;
             set => this._version = this.OnPropertyChanged(value);
         }
-        
+
         public int Language
         {
             get => this._language;
@@ -33,7 +33,7 @@ namespace Shimakaze.ToolKit.CSF.ViewModel
 
         public ObservableCollection<CsfLabelViewModel> Classes { get; }
 
-        public DocumentViewModel(int version, int language, IEnumerable<CsfLabelViewModel> classes, int unknown = 0)
+        public CsfDocumentViewModel(int version, int language, IEnumerable<CsfLabelViewModel> classes, int unknown = 0)
         {
             this.Version = version;
             this.Language = language;
@@ -46,6 +46,26 @@ namespace Shimakaze.ToolKit.CSF.ViewModel
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             return t;
+        }
+
+        public CsfLabelViewModel CreateLabel(CsfLabelViewModel lbl)
+        {
+            var result = lbl is null
+                             ? new CsfLabelViewModel()
+                             : lbl.Class.Equals(CsfLabelViewModel.DEFAULT_STRING, StringComparison.OrdinalIgnoreCase)
+                                 ? new CsfLabelViewModel(string.Empty)
+                                 : new CsfLabelViewModel(lbl.Class);
+            this.Classes.Add(result);
+            return result;
+        }
+
+        public void DropLabel(CsfLabelViewModel lbl) => this.Classes.Remove(lbl);
+
+        public CsfLabelViewModel CopyLabel(CsfLabelViewModel lbl)
+        {
+            var result = lbl.Clone();
+            this.Classes.Add(result);
+            return result;
         }
     }
 }

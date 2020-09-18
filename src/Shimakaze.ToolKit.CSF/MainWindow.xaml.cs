@@ -15,17 +15,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Fluent;
-
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 using Microsoft.Win32;
 
 using Shimakaze.Struct.Csf;
 using Shimakaze.Struct.Csf.Helper;
-using Shimakaze.ToolKit.CSF.ViewModel;
+using Shimakaze.ToolKit.Csf.Data;
+using Shimakaze.ToolKit.Csf.ViewModel;
 
-namespace Shimakaze.ToolKit.CSF
+namespace Shimakaze.ToolKit.Csf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -34,12 +34,14 @@ namespace Shimakaze.ToolKit.CSF
     {
         public MainWindow()
         {
-            InitializeComponent();
+            Application.Current.DispatcherUnhandledException += this.DispatcherUnhandledException;
+            this.InitializeComponent();
+            this.I18NInitialize();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.StatusText.Text = "正在等待对话框返回";
+            this.StatusText.Text = "Waiting".GetResource();
             this.ProgressBar.IsIndeterminate = true;
             var ofd = new OpenFileDialog
             {
@@ -47,51 +49,123 @@ namespace Shimakaze.ToolKit.CSF
             };
             if (ofd.ShowDialog() != true)
             {
-                this.StatusText.Text = "操作取消";
+                this.StatusText.Text = "Cancel".GetResource();
+                this.ProgressBar.IsIndeterminate = false;
                 return;
             }
-            await using var fs = new FileStream(ofd.FileName, FileMode.Open);
+
             GC.TryStartNoGCRegion(150 * 1024 * 1024);
+            this.DocumentView.DataContext =
+                await FileManager.OpenFile(ofd.FileName, this.StatusChange, this.ProgressBarChange);
 
-            this.StatusText.Text = "正在读取文件";
-            var csf = await CsfDocumentHelper.DeserializeAsync(fs, this.ProgressBarChange);
-
-            this.StatusText.Text = "正在转换";
-            this.ProgressBar.Maximum = csf.Count;
-            this.DocumentView.DataContext = new DocumentViewModel(csf.Head.Version, csf.Head.Language, csf.Select(CreateCsfLabelViewModel), csf.Head.Unknown);
-
-            var view = (CollectionView)CollectionViewSource.GetDefaultView(this.ClassView.ItemsSource);
-            var groupDescription = new PropertyGroupDescription(nameof(CsfLabelViewModel.Class));
-            view.GroupDescriptions?.Add(groupDescription);
-
-            this.StatusText.Text = "正在排序";
-            this.ClassView.Items.SortDescriptions.Add(new SortDescription(nameof(CsfLabelViewModel.Class), ListSortDirection.Ascending));
-            this.ClassView.Items.SortDescriptions.Add(new SortDescription(nameof(CsfLabelViewModel.Name), ListSortDirection.Ascending));
-
+            this.ProgressBar.IsIndeterminate = true;
+            this.StatusText.Text = "Sorting".GetResource();
+            await Task.Run(this.DocumentView.SortListView);
             try
             {
                 GC.EndNoGCRegion();
             }
-            catch
+            catch (Exception ex)
             {
-                // ignored
             }
-            this.StatusText.Text = "完成";
+            this.ProgressBar.IsIndeterminate = false;
+            this.ProgressBar.Value = 0;
+            this.StatusText.Text = "Complete".GetResource();
+        }
+        private void CopyClassButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
-            CsfLabelViewModel CreateCsfLabelViewModel(CsfLabel lbl, int i)
+        private void CopyLabelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DocumentView.CopyLabel(this.GetCsfDocumentViewModel());
+            this.StatusText.Text = "Complete".GetResource();
+        }
+
+        private void CopyValueButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async void DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            switch (e.Exception)
             {
-                this.Dispatcher.Invoke(() => this.ProgressBar.Value = i);
-                var tmp = lbl.Name.Split(':');
-                return new CsfLabelViewModel(lbl, tmp.Length > 1 ? tmp[0] : CsfLabelViewModel.DEFAULT_STRING);
+                case FileNotOpenException _:
+                    await this.ShowMessageAsync("Wrong".GetResource(), "Wrong_NotOpenFile".GetResource());
+                    this.StatusText.Text = "Cancel".GetResource();
+                    break;
+                case NotImplementedException _:
+                    await this.ShowMessageAsync("Oops!", "This Function are Not Implemented.");
+                    break;
+                default:
+                    await File.AppendAllTextAsync("error.log", DateTime.Now.ToString("o"));
+                    await File.AppendAllTextAsync("error.log", Environment.NewLine);
+                    await File.AppendAllTextAsync("error.log", e.Exception.ToString());
+                    var result = await this.ShowMessageAsync("Fatal Error!", e.Exception.ToString(), MessageDialogStyle.AffirmativeAndNegative);
+                    if (result == MessageDialogResult.Affirmative)
+                    {
+                        e.Handled = false;
+                    }
+                    break;
             }
         }
+
+        private void DropClassButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DropLabelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DocumentView.DropLabel(this.GetCsfDocumentViewModel());
+            this.StatusText.Text = "Complete".GetResource();
+        }
+
+        private void DropValueButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExportClassButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NewLabelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DocumentView.CreateLabel(this.GetCsfDocumentViewModel());
+            this.StatusText.Text = "Complete".GetResource();
+        }
+
+        private CsfDocumentViewModel GetCsfDocumentViewModel()
+        {
+            if (this.DocumentView.DataContext is CsfDocumentViewModel docvm) return docvm;
+            throw new FileNotOpenException();
+        }
+        private void NewValueButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Task ProgressBarChange(int value, int max) =>
+            Task.Run(() => this.Dispatcher.Invoke(() =>
+            {
+                this.ProgressBar.Value = value;
+                this.ProgressBar.Maximum = max;
+            }));
+
+        private void RenameClassButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private async void SaveTo_Click(object sender, RoutedEventArgs e)
         {
-            if (!(this.DocumentView.DataContext is DocumentViewModel docvm))
-            {
-                this.StatusText.Text = "未打开文件";
-                return;
-            }
+            var docvm = this.GetCsfDocumentViewModel();
+            this.StatusText.Text = "Waiting".GetResource();
             this.ProgressBar.IsIndeterminate = true;
             var ofd = new SaveFileDialog
             {
@@ -100,61 +174,27 @@ namespace Shimakaze.ToolKit.CSF
             };
             if (ofd.ShowDialog() != true)
             {
-                this.StatusText.Text = "操作取消";
+                this.StatusText.Text = "Cancel".GetResource();
+                this.ProgressBar.IsIndeterminate = false;
                 return;
             }
-            await using var fs = new FileStream(ofd.FileName, FileMode.Create);
+
             GC.TryStartNoGCRegion(150 * 1024 * 1024);
-
-            var doc = new CsfDocument();
-
-            this.ProgressBar.IsIndeterminate = false;
-            this.ProgressBar.Maximum = docvm.Classes.Count;
-            this.StatusText.Text = "正在转换";
-            doc.AddRange(docvm.Classes.Select((o, i) =>
-            {
-                this.Dispatcher.Invoke(() => this.ProgressBar.Value = i);
-                return o.GetLabel();
-            }));
-            this.StatusText.Text = "正在计算文件头";
-            doc.Head = new CsfHead
-            {
-                Version = docvm.Version,
-                Language = docvm.Language,
-                Unknown = 0x5CF6_98A8,
-                LabelCount = doc.Count,
-                StringCount = doc.Select((n, i) =>
-                {
-                    this.Dispatcher.Invoke(() => this.ProgressBar.Value = i);
-                    return n.Count;
-                }).Sum()
-            };
-            this.StatusText.Text = "正在写入文件";
-            await doc.SerializeAsync(fs, this.ProgressBarChange);
-
+            await FileManager.SaveFile(ofd.FileName, docvm, this.StatusChange, this.ProgressBarChange);
             try
             {
                 GC.EndNoGCRegion();
             }
-            catch
+            catch (Exception ex)
             {
-                // ignored
             }
-            this.StatusText.Text = "完成";
-        }
-        private void ProgressBarChange(int value, int max)
-        {
-            this.Dispatcher.Invoke(() =>
-            {
-                this.ProgressBar.IsIndeterminate = false;
-                this.ProgressBar.Value = value;
-                this.ProgressBar.Maximum = max;
-            });
         }
 
-        private void ClassView_Selected(object sender, RoutedEventArgs e)
-        {
-            if (this.ValueView.Items.Count > 0) this.ValueView.SelectedIndex = 0;
-        }
+        private Task StatusChange(string msg, bool progress) =>
+            Task.Run(() => this.Dispatcher.Invoke(() =>
+            {
+                this.StatusText.Text = msg;
+                this.ProgressBar.IsIndeterminate = progress;
+            }));
     }
 }

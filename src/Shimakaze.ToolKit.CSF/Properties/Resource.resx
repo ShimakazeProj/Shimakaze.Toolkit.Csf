@@ -117,7 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainWindowTitle" xml:space="preserve">
+  <data name="MainWindow.Title" xml:space="preserve">
     <value>CSF Editor</value>
+  </data>
+  <data name="Converting" xml:space="preserve">
+    <value>正在转换</value>
+  </data>
+  <data name="CalculatingHeader" xml:space="preserve">
+    <value>正在计算文件头</value>
+  </data>
+  <data name="WritingFile" xml:space="preserve">
+    <value>正在写入文件</value>
+  </data>
+  <data name="ReadingFile" xml:space="preserve">
+    <value>正在读取文件</value>
+  </data>
+  <data name="Complete" xml:space="preserve">
+    <value>就绪</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Wrong" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>正在等待返回</value>
+  </data>
+  <data name="Wrong_NotOpenFile" xml:space="preserve">
+    <value>未打开文件, 请先打开一个文件后操作</value>
+  </data>
+  <data name="Sorting" xml:space="preserve">
+    <value>正在排序</value>
+  </data>
+  <data name="RibbonTabItem_Start.Header" xml:space="preserve">
+    <value>开始</value>
+  </data>
+  <data name="RibbonButton_Open.Header" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="RibbonButton_Save.Header" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="RibbonButton_SaveAs.Header" xml:space="preserve">
+    <value>另存为</value>
+  </data>
+  <data name="TextBlock_Version.Text" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="TextBlock_Language.Text" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="TextBlock_LabelCount.Text" xml:space="preserve">
+    <value>标签数</value>
+  </data>
+  <data name="StatusBarItem_Status.Title" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="StatusBarItem_Head.Title" xml:space="preserve">
+    <value>文件头信息</value>
+  </data>
+  <data name="StatusBarItem_Statistics.Title" xml:space="preserve">
+    <value>统计信息</value>
+  </data>
+  <data name="RibbonGroupBox_Class.Header" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="RibbonButton_RenameClass.Header" xml:space="preserve">
+    <value>重命名类型</value>
+  </data>
+  <data name="RibbonButton_CopyClass.Header" xml:space="preserve">
+    <value>创建类型副本</value>
+  </data>
+  <data name="RibbonButton_ExportClass.Header" xml:space="preserve">
+    <value>导出类型到文件</value>
+  </data>
+  <data name="RibbonButton_DropClass.Header" xml:space="preserve">
+    <value>移除类型</value>
+  </data>
+  <data name="RibbonGroupBox_Label.Header" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="RibbonButton_NewLabel.Header" xml:space="preserve">
+    <value>新建标签</value>
+  </data>
+  <data name="RibbonButton_CopyLabel.Header" xml:space="preserve">
+    <value>创建标签副本</value>
+  </data>
+  <data name="RibbonButton_DropLabel.Header" xml:space="preserve">
+    <value>移除标签</value>
+  </data>
+  <data name="RibbonGroupBox_Value.Header" xml:space="preserve">
+    <value>字符串</value>
+  </data>
+  <data name="RibbonButton_NewValue.Header" xml:space="preserve">
+    <value>新建字符串</value>
+  </data>
+  <data name="RibbonButton_CopyValue.Header" xml:space="preserve">
+    <value>创建字符串副本</value>
+  </data>
+  <data name="RibbonButton_DropValue.Header" xml:space="preserve">
+    <value>移除字符串</value>
   </data>
 </root>
