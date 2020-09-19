@@ -10,18 +10,17 @@
     d:DataContext="{d:DesignInstance viewModel:CsfDocumentViewModel}"
     d:DesignHeight="450" d:DesignWidth="800" CompactPaneLength="250"
     DisplayMode="CompactInline" IsPaneOpen="True"
-    OpenPaneLength="250" PanePlacement="Left"
-    SizeChanged="SplitView_SizeChanged" mc:Ignorable="d">
+    OpenPaneLength="250" PanePlacement="Left" mc:Ignorable="d">
     <mah:SplitView.Pane>
         <ListView
             x:Name="ClassView" Grid.Column="0"
-            SelectionMode="Extended"
-            ItemsSource="{Binding Classes}"
+            ItemsSource="{Binding Content}"
             ScrollViewer.CanContentScroll="True"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.IsDeferredScrollingEnabled="True"
             ScrollViewer.VerticalScrollBarVisibility="Visible"
             SelectionChanged="ClassView_Selected"
+            SelectionMode="Extended"
             VirtualizingPanel.CacheLength="20,20"
             VirtualizingPanel.CacheLengthUnit="Pixel"
             VirtualizingPanel.IsVirtualizing="True"
@@ -30,13 +29,12 @@
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModel:CsfLabelViewModel}">
                     <TextBlock>
-                        <Run Text="{Binding Name, Mode=OneWay}" />
+                        <Run Text="{Binding Name}" />
                         <Run FontStyle="Italic" Foreground="{DynamicResource GrayBrush5}" Text="{Binding Contents.Count, Mode=OneWay}" />
                         <Run FontStyle="Italic" Foreground="{DynamicResource GrayBrush5}" Text="item(s)" />
                     </TextBlock>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
             <ListBox.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.Panel>
@@ -67,60 +65,51 @@
                             </Setter>
                         </Style>
                     </GroupStyle.ContainerStyle>
-
                 </GroupStyle>
             </ListBox.GroupStyle>
         </ListView>
     </mah:SplitView.Pane>
     <mah:SplitView.Content>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Button x:Name="OpenPane" Content=">>" Click="OpenPane_Click"/>
+        <Grid
+            x:Name="LabelView" Grid.Column="1" Margin="10"
+            d:DataContext="{d:DesignInstance viewModel:CsfLabelViewModel}"
+            DataContext="{Binding SelectedItem, ElementName=ClassView}"
+            Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Text="Label Name" />
+                <TextBox Text="{Binding Name}" />
+            </StackPanel>
+            <mah:MetroTabControl
+                x:Name="ValueView" Grid.Row="1"
+                ItemsSource="{Binding Contents}"
+                TabStripPlacement="Right">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="viewModel:CsfStringViewModel">
+                        <TextBlock Text="{Binding Index}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type viewModel:CsfStringViewModel}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Value" />
+                            <TextBox Grid.Row="1" Text="{Binding Content}" />
 
-            <Grid
-                x:Name="LabelView" Grid.Column="1" Margin="10"
-                d:DataContext="{d:DesignInstance viewModel:CsfLabelViewModel}"
-                DataContext="{Binding SelectedItem, ElementName=ClassView}"
-                Visibility="Collapsed">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <StackPanel>
-                    <TextBlock Text="Label Name" />
-                    <TextBox Text="{Binding Name}" />
-                </StackPanel>
-                <mah:MetroTabControl
-                    x:Name="ValueView" Grid.Row="1"
-                    ItemsSource="{Binding Contents}"
-                    TabStripPlacement="Right">
-                    <TabControl.ItemTemplate>
-                        <DataTemplate DataType="viewModel:CsfStringViewModel">
-                            <TextBlock Text="{Binding Index}" />
-                        </DataTemplate>
-                    </TabControl.ItemTemplate>
-                    <TabControl.ContentTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:CsfStringViewModel}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition />
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="Value" />
-                                <TextBox Grid.Row="1" Text="{Binding Content}" />
-
-                                <TextBlock Grid.Row="2" Text="ExtraValue" />
-                                <TextBox Grid.Row="3" Text="{Binding Extra}" />
-                            </Grid>
-                        </DataTemplate>
-                    </TabControl.ContentTemplate>
-                </mah:MetroTabControl>
-            </Grid>
+                            <TextBlock Grid.Row="2" Text="ExtraValue" />
+                            <TextBox Grid.Row="3" Text="{Binding Extra}" />
+                        </Grid>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </mah:MetroTabControl>
         </Grid>
     </mah:SplitView.Content>
 </mah:SplitView>

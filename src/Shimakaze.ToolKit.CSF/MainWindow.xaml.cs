@@ -39,7 +39,7 @@ namespace Shimakaze.ToolKit.Csf
             this.I18NInitialize();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void ButtonOpenFile_Click(object sender, RoutedEventArgs e)
         {
             this.StatusText.Text = "Waiting".GetResource();
             this.ProgressBar.IsIndeterminate = true;
@@ -65,21 +65,21 @@ namespace Shimakaze.ToolKit.Csf
             {
                 GC.EndNoGCRegion();
             }
-            catch (Exception ex)
-            {
-            }
+            catch { }
             this.ProgressBar.IsIndeterminate = false;
             this.ProgressBar.Value = 0;
             this.StatusText.Text = "Complete".GetResource();
         }
-        private void CopyClassButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonClassClone_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.StatusText.Text = "Working";
+            this.DocumentView.ClassClone(this.GetCsfDocumentViewModel());
+            this.StatusText.Text = "Complete".GetResource();
         }
 
-        private void CopyLabelButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonLabelClone_Click(object sender, RoutedEventArgs e)
         {
-            this.DocumentView.CopyLabel(this.GetCsfDocumentViewModel());
+            this.DocumentView.LabelClone(this.GetCsfDocumentViewModel());
             this.StatusText.Text = "Complete".GetResource();
         }
 
@@ -113,14 +113,16 @@ namespace Shimakaze.ToolKit.Csf
             }
         }
 
-        private void DropClassButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonClassDrop_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.StatusText.Text = "Working";
+            this.DocumentView.ClassDrop(this.GetCsfDocumentViewModel());
+            this.StatusText.Text = "Complete".GetResource();
         }
 
-        private void DropLabelButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonLabelDrop_Click(object sender, RoutedEventArgs e)
         {
-            this.DocumentView.DropLabel(this.GetCsfDocumentViewModel());
+            this.DocumentView.LabelDrop(this.GetCsfDocumentViewModel());
             this.StatusText.Text = "Complete".GetResource();
         }
 
@@ -136,7 +138,7 @@ namespace Shimakaze.ToolKit.Csf
 
         private void NewLabelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DocumentView.CreateLabel(this.GetCsfDocumentViewModel());
+            this.DocumentView.LabelCreate(this.GetCsfDocumentViewModel());
             this.StatusText.Text = "Complete".GetResource();
         }
 
@@ -157,12 +159,16 @@ namespace Shimakaze.ToolKit.Csf
                 this.ProgressBar.Maximum = max;
             }));
 
-        private void RenameClassButton_Click(object sender, RoutedEventArgs e)
+        private async void ButtonRenameClass_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var docvm = this.GetCsfDocumentViewModel();
+            var newClassName = await this.ShowInputAsync("Rename Class", "Please Input a New Class Name");
+            this.StatusText.Text = "Working";
+            this.DocumentView.ClassRename(docvm, newClassName);
+            this.StatusText.Text = "Complete".GetResource();
         }
 
-        private async void SaveTo_Click(object sender, RoutedEventArgs e)
+        private async void ButtonSaveTo_Click(object sender, RoutedEventArgs e)
         {
             var docvm = this.GetCsfDocumentViewModel();
             this.StatusText.Text = "Waiting".GetResource();
@@ -185,9 +191,7 @@ namespace Shimakaze.ToolKit.Csf
             {
                 GC.EndNoGCRegion();
             }
-            catch (Exception ex)
-            {
-            }
+            catch { }
         }
 
         private Task StatusChange(string msg, bool progress) =>

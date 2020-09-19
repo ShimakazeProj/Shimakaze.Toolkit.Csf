@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +16,7 @@ using System.Windows.Shapes;
 
 using MahApps.Metro.Controls;
 
+using Shimakaze.ToolKit.Csf.Data;
 using Shimakaze.ToolKit.Csf.ViewModel;
 
 namespace Shimakaze.ToolKit.Csf
@@ -24,15 +26,78 @@ namespace Shimakaze.ToolKit.Csf
     /// </summary>
     public partial class CsfDocumentView
     {
-        public CsfDocumentView()
-        {
-            this.InitializeComponent();
-        }
-
         private void ClassView_Selected(object sender, SelectionChangedEventArgs e)
         {
             if (this.ValueView.Items.Count > 0) this.ValueView.SelectedIndex = 0;
             this.LabelView.Visibility = this.ClassView.SelectedItem != null ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public CsfDocumentView()
+        {
+            this.InitializeComponent();
+        }
+        public static T GetDescendantByType<T>(DependencyObject element) where T : Visual
+        {
+            switch (element)
+            {
+                case null:
+                    throw new ArgumentNullException(nameof(element));
+                case T result:
+                    return result;
+                case FrameworkElement frameworkElement:
+                    frameworkElement.ApplyTemplate();
+                    for (var i = 0; i < VisualTreeHelper.GetChildrenCount(element); i++)
+                    {
+                        var result = GetDescendantByType<T>(VisualTreeHelper.GetChild(element, i));
+                        if (!(result is null))
+                            return result;
+                    }
+                    return null;
+                default:
+                    return null;
+            }
+        }
+
+        public void ClassClone(CsfDocumentViewModel docvm)
+        {
+            var className = (this.ClassView.SelectedItem as CsfLabelViewModel)?.Class;
+            var result = docvm.ClassClone(className);
+
+            this.ClassView.SelectedItems.Clear();
+            result.ForEach(i => this.ClassView.SelectedItems.Add(i));
+        }
+
+        public void ClassDrop(CsfDocumentViewModel docvm) => docvm.ClassDrop((this.ClassView.SelectedItem as CsfLabelViewModel)?.Class);
+
+        public void ClassRename(CsfDocumentViewModel docvm, string newClassName) => 
+            this.SelectLabel(docvm.ClassRename((this.ClassView.SelectedItem as CsfLabelViewModel)?.Class, newClassName));
+
+        public void LabelClone(CsfDocumentViewModel docvm)
+        {
+            var list = new List<CsfLabelViewModel>(this.ClassView.SelectedItems.Count);
+            for (var i = this.ClassView.SelectedItems.Count - 1; i >= 0; i--)
+                list.Add(docvm.LabelClone(this.ClassView.SelectedItems[i] as CsfLabelViewModel));
+            this.SelectLabel(list);
+        }
+
+        public void LabelCreate(CsfDocumentViewModel docvm) => this.SelectLabel(docvm.LabelCreate(this.ClassView.SelectedItem as CsfLabelViewModel));
+        public void LabelDrop(CsfDocumentViewModel docvm)
+        {
+            for (var i = this.ClassView.SelectedItems.Count - 1; i >= 0; i--)
+                docvm.LabelDrop(this.ClassView.SelectedItems[i] as CsfLabelViewModel);
+        }
+        public void SelectLabel(CsfLabelViewModel lbl)
+        {
+            this.ClassView.ScrollIntoView(this.ClassView.SelectedItem = lbl);
+            this.ClassView_Selected(null, null);
+        }
+
+        public void SelectLabel(IEnumerable<CsfLabelViewModel> lbl)
+        {
+            this.ClassView.SelectedItems.Clear();
+            _ = lbl.Select(this.ClassView.SelectedItems.Add);
+            this.ClassView.ScrollIntoView(lbl.Last());
+            this.ClassView_Selected(null, null);
         }
 
         public void SortListView()
@@ -40,61 +105,15 @@ namespace Shimakaze.ToolKit.Csf
             this.ClassView.Dispatcher.Invoke(() =>
             {
                 var view = (CollectionView)CollectionViewSource.GetDefaultView(this.ClassView.ItemsSource);
-                var groupDescription = new PropertyGroupDescription(nameof(CsfLabelViewModel.Class));
+                var groupDescription = new PropertyGroupDescription();
+                groupDescription.StringComparison = StringComparison.OrdinalIgnoreCase;
+                groupDescription.SortDescriptions.Add(
+                    new SortDescription(nameof(CsfLabelViewModel.Name), ListSortDirection.Ascending));
+                
                 view.GroupDescriptions?.Add(groupDescription);
                 this.ClassView.Items.SortDescriptions.Add(
                     new SortDescription(nameof(CsfLabelViewModel.Class), ListSortDirection.Ascending));
-                this.ClassView.Items.SortDescriptions.Add(
-                    new SortDescription(nameof(CsfLabelViewModel.Name), ListSortDirection.Ascending));
             });
-        }
-
-        private void SplitView_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (this.ActualWidth < 800)
-            {
-                this.DisplayMode = SplitViewDisplayMode.Overlay;
-                this.OpenPane.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                this.DisplayMode = SplitViewDisplayMode.CompactInline;
-                this.OpenPane.Visibility = Visibility.Collapsed;
-            }
-        }
-
-        private void OpenPane_Click(object sender, RoutedEventArgs e)
-        {
-            this.IsPaneOpen = true;
-        }
-
-        public void CreateLabel(CsfDocumentViewModel docvm) => this.SelectLabel(docvm.CreateLabel(this.ClassView.SelectedItem as CsfLabelViewModel));
-
-        public void DropLabel(CsfDocumentViewModel docvm)
-        {
-            for (var i = this.ClassView.SelectedItems.Count - 1; i >= 0; i--)
-                docvm.DropLabel(this.ClassView.SelectedItems[i] as CsfLabelViewModel);
-        }
-
-        public void CopyLabel(CsfDocumentViewModel docvm)
-        {
-            var list = new List<CsfLabelViewModel>(this.ClassView.SelectedItems.Count);
-            for (var i = this.ClassView.SelectedItems.Count - 1; i >= 0; i--)
-                list.Add(docvm.CopyLabel(this.ClassView.SelectedItems[i] as CsfLabelViewModel));
-            this.ClassView.SelectedItems.Clear();
-            list.ForEach(i => this.ClassView.SelectedItems.Add(i));
-        }
-
-        public void SelectLabel(CsfLabelViewModel lbl)
-        {
-            this.ClassView.ScrollIntoView(this.ClassView.SelectedItem = lbl);
-            this.ClassView_Selected(null, null);
-        }
-        public void SelectLabel(IEnumerable<CsfLabelViewModel> lbl)
-        {
-            _ = lbl.Select(i => this.ClassView.SelectedItems.Add(i));
-            this.ClassView.ScrollIntoView(lbl.Last());
-            this.ClassView_Selected(null, null);
         }
     }
 }

@@ -15,14 +15,21 @@ namespace Shimakaze.ToolKit.Csf.ViewModel
         public string Content
         {
             get => this._content;
-            set => this._content = this.OnPropertyChanged(value);
+            set
+            {
+                this._content = value;
+                this.OnPropertyChanged();
+            }
         }
         public int Index { get; }
         public string Extra
         {
             get => this._extra;
-            set => this._extra = this.OnPropertyChanged(value);
-
+            set
+            {
+                this._extra = value;
+                this.OnPropertyChanged();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -34,11 +41,7 @@ namespace Shimakaze.ToolKit.Csf.ViewModel
         }
 
         [NotifyPropertyChangedInvocator]
-        protected virtual T OnPropertyChanged<T>(T t, [CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            return t;
-        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public static CsfStringViewModel CreateInstance(CsfString arg, int index) => new CsfStringViewModel(arg, index);
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Shimakaze.Struct.Csf;
 
 using System.ComponentModel;
@@ -14,11 +15,27 @@ namespace Shimakaze.ToolKit.Csf.ViewModel
     {
         private string @class;
         private string name;
+        private CsfLabelViewModel(string name, ObservableCollection<CsfStringViewModel> value)
+        {
+            this.Name = name;
+            this.Contents = value;
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         public const string DEFAULT_STRING = "(Default)";
         public string Class
         {
-            get => this.@class;
-            set => this.@class = this.OnPropertyChanged(value.ToUpper());
+            get => this.@class.ToUpper();
+            set
+            {
+                var a = this.name.IndexOf(this.@class, StringComparison.OrdinalIgnoreCase);
+                this.name = this.name.Remove(a, this.@class.Length).Insert(a, value);
+                this.@class = value.ToUpper();
+                this.OnPropertyChanged(nameof(this.Name));
+                this.OnPropertyChanged();
+            }
         }
 
         public ObservableCollection<CsfStringViewModel> Contents { get; }
@@ -26,50 +43,31 @@ namespace Shimakaze.ToolKit.Csf.ViewModel
         public string Name
         {
             get => this.name;
-            set => this.name = this.OnPropertyChanged(value);
+            set
+            {
+                var cn = value.Split(':');
+                this.@class = cn.Length > 1 ? cn[0] : DEFAULT_STRING;
+                this.name = value;
+                this.OnPropertyChanged(nameof(this.Class));
+                this.OnPropertyChanged();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public CsfLabelViewModel(CsfLabel label, string type) :
-            this(type, label.Name,
-                 new ObservableCollection<CsfStringViewModel>(
+        public CsfLabelViewModel(CsfLabel label) :
+                    this(label.Name, new ObservableCollection<CsfStringViewModel>(
                      label.Select(CsfStringViewModel.CreateInstance)))
         { }
+        public static CsfLabelViewModel Create(string name, string value) =>
+            new CsfLabelViewModel(name, new ObservableCollection<CsfStringViewModel>
+                                      {new CsfStringViewModel(CsfStringHelper.Create(value), 0)});
 
-        public CsfLabelViewModel(string type = "TYPE", string name = "NEW_LABEL", string value = "new value")
-        {
-            this.Contents = new ObservableCollection<CsfStringViewModel>
-                {new CsfStringViewModel(CsfStringHelper.Create(value), 0)};
-            if (!string.IsNullOrEmpty(type))
-            {
-                this.Name += type + ':';
-                this.Class = type;
-            }
-            else this.Class = DEFAULT_STRING;
-            this.Name += name;
-        }
-        private CsfLabelViewModel(string type, string name, ObservableCollection<CsfStringViewModel> value)
-        {
-            this.Name = name;
-            this.Class = type;
-            this.Contents = value;
-        }
-
-        public CsfLabelViewModel Clone()
+        public CsfLabelViewModel Clone(string suffix = null)
         {
             var tmp = new CsfStringViewModel[this.Contents.Count];
             this.Contents.CopyTo(tmp, 0);
-            return new CsfLabelViewModel(this.Class, this.Name + "_CLONE", new ObservableCollection<CsfStringViewModel>(tmp));
+            return new CsfLabelViewModel(this.Name + suffix, new ObservableCollection<CsfStringViewModel>(tmp));
         }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual T OnPropertyChanged<T>(T t, [CallerMemberName] string propertyName = null)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            return t;
-        }
-
         public CsfLabel GetLabel()
         {
             var lbl = new CsfLabel()

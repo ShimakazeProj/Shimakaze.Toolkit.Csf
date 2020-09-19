@@ -27,10 +27,10 @@ namespace Shimakaze.ToolKit.Csf.Data
             var doc = new CsfDocument();
 
             _ = statusCallback?.Invoke("Converting".GetResource(), false);
-            _ = progressCallback?.Invoke(0, docvm.Classes.Count);
-            doc.AddRange(docvm.Classes.Select((o, i) =>
+            _ = progressCallback?.Invoke(0, docvm.Content.Count);
+            doc.AddRange(docvm.Content.Select((o, i) =>
             {
-                _ = progressCallback?.Invoke(i, docvm.Classes.Count);
+                _ = progressCallback?.Invoke(i, docvm.Content.Count);
                 return o.GetLabel();
             }));
 
@@ -65,8 +65,7 @@ namespace Shimakaze.ToolKit.Csf.Data
             return new CsfDocumentViewModel(csf.Head.Version, csf.Head.Language, csf.Select((lbl, i) =>
             {
                 _ = progressCallback?.Invoke(i, csf.Count);
-                var tmp = lbl.Name.Split(':');
-                return new CsfLabelViewModel(lbl, tmp.Length > 1 ? tmp[0] : CsfLabelViewModel.DEFAULT_STRING);
+                return new CsfLabelViewModel(lbl);
             }));
         }
     }

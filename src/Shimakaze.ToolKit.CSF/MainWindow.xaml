@@ -11,7 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ribbon="urn:fluent-ribbon"
     xmlns:viewModel="clr-namespace:Shimakaze.ToolKit.Csf.ViewModel"
-    x:Uid="MainWindow" ResizeMode="CanResize"
+    x:Uid="MainWindow" ResizeMode="CanResizeWithGrip"
     WindowStartupLocation="CenterOwner" mc:Ignorable="d">
     <mah:MetroWindow.TitleTemplate>
         <DataTemplate>
@@ -30,8 +30,8 @@
             <ribbon:Ribbon.Menu>
                 <ribbon:Backstage>
                     <ribbon:BackstageTabControl>
-                        <ribbon:Button x:Uid="RibbonButton_Open" Click="Button_Click" />
-                        <ribbon:Button x:Uid="RibbonButton_SaveAs" Click="SaveTo_Click" />
+                        <ribbon:Button x:Uid="RibbonButton_Open" Click="ButtonOpenFile_Click" />
+                        <ribbon:Button x:Uid="RibbonButton_SaveAs" Click="ButtonSaveTo_Click" />
                     </ribbon:BackstageTabControl>
                 </ribbon:Backstage>
             </ribbon:Ribbon.Menu>
@@ -39,15 +39,15 @@
             <!--  Tabs  -->
             <ribbon:RibbonTabItem x:Uid="RibbonTabItem_Start">
                 <ribbon:RibbonGroupBox x:Uid="RibbonGroupBox_Class">
-                    <ribbon:Button x:Uid="RibbonButton_RenameClass" Click="RenameClassButton_Click" />
-                    <ribbon:Button x:Uid="RibbonButton_CopyClass" Click="CopyClassButton_Click" />
+                    <ribbon:Button x:Uid="RibbonButton_RenameClass" Click="ButtonRenameClass_Click" />
+                    <ribbon:Button x:Uid="RibbonButton_CopyClass" Click="ButtonClassClone_Click" />
                     <ribbon:Button x:Uid="RibbonButton_ExportClass" Click="ExportClassButton_Click" />
-                    <ribbon:Button x:Uid="RibbonButton_DropClass" Click="DropClassButton_Click" />
+                    <ribbon:Button x:Uid="RibbonButton_DropClass" Click="ButtonClassDrop_Click" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox x:Uid="RibbonGroupBox_Label">
                     <ribbon:Button x:Uid="RibbonButton_NewLabel" Click="NewLabelButton_Click" />
-                    <ribbon:Button x:Uid="RibbonButton_CopyLabel" Click="CopyLabelButton_Click" />
-                    <ribbon:Button x:Uid="RibbonButton_DropLabel" Click="DropLabelButton_Click" />
+                    <ribbon:Button x:Uid="RibbonButton_CopyLabel" Click="ButtonLabelClone_Click" />
+                    <ribbon:Button x:Uid="RibbonButton_DropLabel" Click="ButtonLabelDrop_Click" />
                 </ribbon:RibbonGroupBox>
                 <ribbon:RibbonGroupBox x:Uid="RibbonGroupBox_Value">
                     <ribbon:Button x:Uid="RibbonButton_NewValue" Click="NewValueButton_Click" />
