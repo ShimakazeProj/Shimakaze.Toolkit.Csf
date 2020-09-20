@@ -1,10 +1,10 @@
-﻿using Shimakaze.ToolKit.Csf.ViewModel;
+﻿using Shimakaze.Toolkit.Csf.ViewModel;
 
 using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Shimakaze.ToolKit.Csf.Converters
+namespace Shimakaze.Toolkit.Csf.Converters
 {
     public class ClassGroupDescription:IValueConverter
     {

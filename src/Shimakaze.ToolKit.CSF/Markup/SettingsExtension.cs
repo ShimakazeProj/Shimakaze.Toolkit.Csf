@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace Shimakaze.ToolKit.Csf.Markup
+namespace Shimakaze.Toolkit.Csf.Markup
 {
     public class SettingsExtension : MarkupExtension
     {

@@ -6,10 +6,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Shimakaze.ToolKit.Csf.Annotations;
+using Shimakaze.Toolkit.Csf.Annotations;
 using Shimakaze.Struct.Csf.Helper;
 
-namespace Shimakaze.ToolKit.Csf.ViewModel
+namespace Shimakaze.Toolkit.Csf.ViewModel
 {
     public class CsfLabelViewModel : INotifyPropertyChanged
     {

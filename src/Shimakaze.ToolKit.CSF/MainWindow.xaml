@@ -1,16 +1,16 @@
 ﻿<mah:MetroWindow
-    x:Class="Shimakaze.ToolKit.Csf.MainWindow"
+    x:Class="Shimakaze.Toolkit.Csf.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:csf="clr-namespace:Shimakaze.Struct.Csf;assembly=Shimakaze.Struct.Csf"
-    xmlns:cvtr="clr-namespace:Shimakaze.ToolKit.Csf.Converters"
+    xmlns:cvtr="clr-namespace:Shimakaze.Toolkit.Csf.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:ext="clr-namespace:Shimakaze.ToolKit.Csf.Markup"
-    xmlns:local="clr-namespace:Shimakaze.ToolKit.Csf"
+    xmlns:ext="clr-namespace:Shimakaze.Toolkit.Csf.Markup"
+    xmlns:local="clr-namespace:Shimakaze.Toolkit.Csf"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ribbon="urn:fluent-ribbon"
-    xmlns:viewModel="clr-namespace:Shimakaze.ToolKit.Csf.ViewModel"
+    xmlns:viewModel="clr-namespace:Shimakaze.Toolkit.Csf.ViewModel"
     x:Uid="MainWindow" ResizeMode="CanResizeWithGrip"
     WindowStartupLocation="CenterOwner" mc:Ignorable="d">
     <mah:MetroWindow.TitleTemplate>

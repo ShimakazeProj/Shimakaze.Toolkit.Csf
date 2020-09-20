@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Resources;
 using System.Windows;
 
-namespace Shimakaze.ToolKit.Csf.Data
+namespace Shimakaze.Toolkit.Csf.Data
 {
     public static class ResourceHelper
     {

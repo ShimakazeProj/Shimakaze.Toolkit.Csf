@@ -3,9 +3,9 @@ using System.Runtime.CompilerServices;
 
 using Shimakaze.Struct.Csf;
 using Shimakaze.Struct.Csf.Helper;
-using Shimakaze.ToolKit.Csf.Annotations;
+using Shimakaze.Toolkit.Csf.Annotations;
 
-namespace Shimakaze.ToolKit.Csf.ViewModel
+namespace Shimakaze.Toolkit.Csf.ViewModel
 {
     public class CsfStringViewModel : INotifyPropertyChanged
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Shimakaze.ToolKit.Csf
+namespace Shimakaze.Toolkit.Csf
 {
     [Serializable]
     public class FileNotOpenException : Exception

@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="Shimakaze.ToolKit.Csf.App"
+    x:Class="Shimakaze.Toolkit.Csf.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Shimakaze.ToolKit.Csf"
+    xmlns:local="clr-namespace:Shimakaze.Toolkit.Csf"
     xmlns:ui="http://schemas.modernwpf.com/2019"
     StartupUri="MainWindow.xaml">
     <Application.Resources>

@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shimakaze.ToolKit.Csf", "src\Shimakaze.ToolKit.CSF\Shimakaze.ToolKit.Csf.csproj", "{35660368-C5DD-4F78-B495-9AD20C7C4F52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shimakaze.Toolkit.Csf", "src\Shimakaze.Toolkit.Csf\Shimakaze.Toolkit.Csf.csproj", "{35660368-C5DD-4F78-B495-9AD20C7C4F52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Folder", "Solution Folder", "{621AD6C6-9D84-44C6-A12D-911DE097D27C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

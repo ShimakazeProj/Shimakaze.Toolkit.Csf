@@ -16,10 +16,10 @@ using System.Windows.Shapes;
 
 using MahApps.Metro.Controls;
 
-using Shimakaze.ToolKit.Csf.Data;
-using Shimakaze.ToolKit.Csf.ViewModel;
+using Shimakaze.Toolkit.Csf.Data;
+using Shimakaze.Toolkit.Csf.ViewModel;
 
-namespace Shimakaze.ToolKit.Csf
+namespace Shimakaze.Toolkit.Csf
 {
     /// <summary>
     /// CsfDocumentView.xaml 的交互逻辑

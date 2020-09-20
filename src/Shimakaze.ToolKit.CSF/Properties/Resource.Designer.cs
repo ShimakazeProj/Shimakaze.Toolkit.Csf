@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Shimakaze.ToolKit.Csf.Properties {
+namespace Shimakaze.Toolkit.Csf.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Shimakaze.ToolKit.Csf.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shimakaze.ToolKit.Csf.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shimakaze.Toolkit.Csf.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

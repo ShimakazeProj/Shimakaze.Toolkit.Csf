@@ -22,10 +22,10 @@ using Microsoft.Win32;
 
 using Shimakaze.Struct.Csf;
 using Shimakaze.Struct.Csf.Helper;
-using Shimakaze.ToolKit.Csf.Data;
-using Shimakaze.ToolKit.Csf.ViewModel;
+using Shimakaze.Toolkit.Csf.Data;
+using Shimakaze.Toolkit.Csf.ViewModel;
 
-namespace Shimakaze.ToolKit.Csf
+namespace Shimakaze.Toolkit.Csf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

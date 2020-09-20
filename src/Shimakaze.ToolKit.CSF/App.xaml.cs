@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-using Shimakaze.ToolKit.Csf.Data;
-using Shimakaze.ToolKit.Csf.Properties;
+using Shimakaze.Toolkit.Csf.Data;
+using Shimakaze.Toolkit.Csf.Properties;
 
-namespace Shimakaze.ToolKit.Csf
+namespace Shimakaze.Toolkit.Csf
 {
     /// <summary>
     /// Interaction logic for App.xaml

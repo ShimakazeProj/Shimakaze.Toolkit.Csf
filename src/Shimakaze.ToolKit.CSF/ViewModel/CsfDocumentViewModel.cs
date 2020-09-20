@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 using Shimakaze.Struct.Csf;
 using Shimakaze.Struct.Csf.Helper;
-using Shimakaze.ToolKit.Csf.Annotations;
-using Shimakaze.ToolKit.Csf.Data;
+using Shimakaze.Toolkit.Csf.Annotations;
+using Shimakaze.Toolkit.Csf.Data;
 
-namespace Shimakaze.ToolKit.Csf.ViewModel
+namespace Shimakaze.Toolkit.Csf.ViewModel
 {
     public class CsfDocumentViewModel : INotifyPropertyChanged
     {

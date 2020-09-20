@@ -1,4 +1,4 @@
-﻿namespace Shimakaze.ToolKit.Csf.Data
+﻿namespace Shimakaze.Toolkit.Csf.Data
 {
     public static class OverAll
     {
